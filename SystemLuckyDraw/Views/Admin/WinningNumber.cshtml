@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SystemLuckyDraw.Models.WinningNumber>
+
+@{
+    ViewBag.Title = "WinningNumber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Winning Numbers from All Users</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WinningNo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WinningNo)
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+<p>
+
+    @Html.ActionLink("Back to Draw Prize", "DrawPrize")
+</p>

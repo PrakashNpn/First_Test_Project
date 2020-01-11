@@ -1,0 +1,66 @@
+﻿@model SystemLuckyDraw.Models.WinningNumber
+
+@{
+    ViewBag.Title = "AddNumber";
+     Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>AddNumber</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+
+    <div>
+        @Html.HiddenFor(model => model.Email, new { Value = Session["Email"]})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.WinningNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.WinningNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WinningNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Generate", "Generate Randomly", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.DropDownList("GenerateRandom", new List<SelectListItem> {
+                                                  new SelectListItem {Text="Yes",Value="1"},
+                                                  new SelectListItem {Text="No", Value="0"}
+
+                                                }, "---Please Select---", htmlAttributes: new { style = "width : 300px; height:30px; border-radius: 5px;" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Number" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<script type="text/javascript">
+
+
+    var drop = document.getElementById("GenerateRandom");
+    drop.onchange = function () {
+        if (this.value == "1") {
+
+            var random = Math.round(Math.random() * (9999 - 1000) + 1000);
+            var textbox = document.getElementById("WinningNo");
+            textbox.value = random;
+        } else if (this.value == "0"){
+            var textbox = document.getElementById("WinningNo");
+            textbox.value = "";
+        }
+    }
+
+
+</script>
+
+
